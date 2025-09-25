@@ -1,0 +1,12 @@
+{# Simple rendering of items list #}
+<ul class="rss-items">
+    {% for item in items %}
+        <li class="rss-item">
+            <a href="{{ item.url }}">{{ item.title }}</a>
+            <div class="rss-date">{{ item.published|date('Y-m-d H:i') }}</div>
+            <div class="rss-content">{{ item.content|raw }}</div>
+        </li>
+    {% else %}
+        <li>No items</li>
+    {% endfor %}
+</ul>
