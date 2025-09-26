@@ -1,7 +1,6 @@
 <?php
 
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\DependencyInjection\Reference;
 
 return static function (ContainerConfigurator $config): void {
     $services = $config->services();
@@ -10,7 +9,7 @@ return static function (ContainerConfigurator $config): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load('RssFeed\\Bundle\\', __DIR__ . '/../../*')
+    $services->load('TatevikGr\\RssBundle\\RssFeedBundle\\', __DIR__ . '/../../*')
         ->exclude([
             __DIR__ . '/../../Resources',
         ]);

@@ -38,5 +38,12 @@
     "allow-plugins": {
       "php-http/discovery": true
     }
+  },
+  "extra": {
+    "symfony": {
+      "bundle": {
+        "TatevikGr\\RssBundle\\RssFeedBundle\\RssFeedBundle": ["all"]
+      }
+    }
   }
 }
