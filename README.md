@@ -23,6 +23,15 @@ How to use it inside your Symfony application:
 3) Ensure Doctrine is configured to use your existing database which contains the tables feed, item, item_data.
    The bundle maps entities to those exact tables, preserving the schema.
 
+   No existing tables? Use Doctrine Migrations to create them:
+    - Require in your app: doctrine/migrations and doctrine/doctrine-migrations-bundle
+    - Configure a migration path that points to this bundle (config/packages/doctrine_migrations.yaml):
+        doctrine_migrations:
+          migrations_paths:
+            'TatevikGr\\RssBundle\\RssFeedBundle\\Migrations': '%kernel.project_dir%/vendor/tatevikgr/rss-bundle/src/RssFeedBundle/Migrations'
+    - Then run migrations in your app:
+        php bin/console doctrine:migrations:migrate
+
 4) Messenger: configure a transport (e.g. async) and run a worker:
     - symfony console messenger:consume async -vv
 
