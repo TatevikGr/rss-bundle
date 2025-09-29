@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle\Migrations;
+namespace TatevikGr\RssFeedBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -50,7 +50,13 @@ final class Version20250926114800 extends AbstractMigration
                 }
             }
             if (!$hasFk) {
-                $item->addForeignKeyConstraint('feed', ['feedid'], ['id'], ['onDelete' => 'RESTRICT', 'onUpdate' => 'NO ACTION'], 'FK_item_feed');
+                $item->addForeignKeyConstraint(
+                    'feed',
+                    ['feedid'],
+                    ['id'],
+                    ['onDelete' => 'RESTRICT', 'onUpdate' => 'NO ACTION'],
+                    'FK_item_feed'
+                );
             }
         }
 
@@ -74,7 +80,13 @@ final class Version20250926114800 extends AbstractMigration
                 }
             }
             if (!$hasFk) {
-                $itemData->addForeignKeyConstraint('item', ['itemid'], ['id'], ['onDelete' => 'CASCADE', 'onUpdate' => 'NO ACTION'], 'FK_itemdata_item');
+                $itemData->addForeignKeyConstraint(
+                    'item',
+                    ['itemid'],
+                    ['id'],
+                    ['onDelete' => 'CASCADE', 'onUpdate' => 'NO ACTION'],
+                    'FK_itemdata_item'
+                );
             }
         }
     }

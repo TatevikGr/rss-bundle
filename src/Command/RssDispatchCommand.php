@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle\Command;
+namespace TatevikGr\RssFeedBundle\Command;
 
-use TatevikGr\RssBundle\RssFeedBundle\Messenger\FetchFeedMessage;
-use TatevikGr\RssBundle\RssFeedBundle\Repository\FeedRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use TatevikGr\RssFeedBundle\Messenger\FetchFeedMessage;
+use TatevikGr\RssFeedBundle\Repository\FeedRepository;
 
 #[AsCommand(name: 'rss:dispatch', description: 'Dispatch feed imports for all configured feeds')]
 class RssDispatchCommand extends Command

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle;
+namespace TatevikGr\RssFeedBundle;
 
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use TatevikGr\RssBundle\RssFeedBundle\DependencyInjection\RssFeedExtension;
+use TatevikGr\RssFeedBundle\DependencyInjection\RssFeedExtension;
 
 class RssFeedBundle extends Bundle
 {

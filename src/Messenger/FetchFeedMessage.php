@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle\Messenger;
+namespace TatevikGr\RssFeedBundle\Messenger;
 
 class FetchFeedMessage
 {

@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle\Service;
+namespace TatevikGr\RssFeedBundle\Service;
 
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use FeedIo\FeedIo;
 use FeedIo\Reader\ReadErrorException;
-use TatevikGr\RssBundle\RssFeedBundle\Entity\FeedItem;
-use TatevikGr\RssBundle\RssFeedBundle\Entity\ItemData;
-use TatevikGr\RssBundle\RssFeedBundle\Repository\FeedItemRepository;
-use TatevikGr\RssBundle\RssFeedBundle\Repository\FeedRepository;
+use TatevikGr\RssFeedBundle\Entity\FeedItem;
+use TatevikGr\RssFeedBundle\Entity\ItemData;
+use TatevikGr\RssFeedBundle\Repository\FeedItemRepository;
+use TatevikGr\RssFeedBundle\Repository\FeedRepository;
 
 class FeedImporter
 {

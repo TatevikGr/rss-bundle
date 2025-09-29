@@ -1,5 +1,5 @@
 {
-  "name": "tatevikgr/rss-bundle",
+  "name": "tatevikgr/rss-feed",
   "type": "symfony-bundle",
   "license": "AGPL-3.0-or-later",
   "description": "Symfony bundle for building recurring campaigns from RSS/Atom feeds for phpList4",
@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "TatevikGr\\RssBundle\\RssFeedBundle\\": "src/RssFeedBundle/"
+      "TatevikGr\\RssFeedBundle\\": "src/"
     }
   },
   "autoload-dev": {
@@ -42,8 +42,11 @@
   "extra": {
     "phplist/core": {
       "bundles": [
-        "TatevikGr\\RssBundle\\RssFeedBundle\\RssFeedBundle"
-      ]
+        "TatevikGr\\RssFeedBundle\\RssFeedBundle"
+      ],
+      "migrations": {
+        "TatevikGr\\RssFeedBundle\\Migrations": "vendor/tatevikgr/rss-bundle/src/Migrations"
+      }
     }
   }
 }

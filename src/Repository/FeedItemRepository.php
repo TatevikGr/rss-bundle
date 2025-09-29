@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle\Repository;
+namespace TatevikGr\RssFeedBundle\Repository;
 
-use Doctrine\Persistence\ManagerRegistry;
-use TatevikGr\RssBundle\RssFeedBundle\Entity\Feed;
-use TatevikGr\RssBundle\RssFeedBundle\Entity\FeedItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use TatevikGr\RssFeedBundle\Entity\Feed;
+use TatevikGr\RssFeedBundle\Entity\FeedItem;
 
 /**
  * @extends ServiceEntityRepository<FeedItem>

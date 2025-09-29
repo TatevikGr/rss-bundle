@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle\Service;
+namespace TatevikGr\RssFeedBundle\Service;
 
 use FeedIo\FeedIo;
 use Psr\Http\Client\ClientInterface;

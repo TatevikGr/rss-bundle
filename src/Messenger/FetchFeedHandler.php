@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace TatevikGr\RssBundle\RssFeedBundle\Messenger;
+namespace TatevikGr\RssFeedBundle\Messenger;
 
-use TatevikGr\RssBundle\RssFeedBundle\Service\FeedImporter;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use TatevikGr\RssFeedBundle\Service\FeedImporter;
 
 #[AsMessageHandler]
 class FetchFeedHandler

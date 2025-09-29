@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 namespace TatevikGr\RssBundle\Tests\Service;
 
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use FeedIo\FeedIo;
 use FeedIo\Reader\ReadErrorException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use TatevikGr\RssBundle\RssFeedBundle\Entity\Feed;
-use TatevikGr\RssBundle\RssFeedBundle\Repository\FeedItemRepository;
-use TatevikGr\RssBundle\RssFeedBundle\Repository\FeedRepository;
-use TatevikGr\RssBundle\RssFeedBundle\Service\FeedImporter;
+use TatevikGr\RssFeedBundle\Entity\Feed;
+use TatevikGr\RssFeedBundle\Repository\FeedItemRepository;
+use TatevikGr\RssFeedBundle\Repository\FeedRepository;
+use TatevikGr\RssFeedBundle\Service\FeedImporter;
 
 class FeedImporterTest extends TestCase
 {
