@@ -20,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "TatevikGr\\RssBundle\\": "src/"
+      "TatevikGr\\RssBundle\\RssFeedBundle\\": "src/RssFeedBundle/"
     }
   },
   "autoload-dev": {
@@ -40,10 +40,10 @@
     }
   },
   "extra": {
-    "symfony": {
-      "bundle": {
-        "TatevikGr\\RssBundle\\RssFeedBundle\\RssFeedBundle": ["all"]
-      }
+    "phplist/core": {
+      "bundles": [
+        "TatevikGr\\RssBundle\\RssFeedBundle\\RssFeedBundle"
+      ]
     }
   }
 }
