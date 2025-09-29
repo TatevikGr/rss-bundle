@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace TatevikGr\RssBundle\RssFeedBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Tatevikgr\RssBundle\RssFeedBundle\Repository\ItemDataRepository;
+use TatevikGr\RssBundle\RssFeedBundle\Repository\ItemDataRepository;
 
 #[ORM\Entity(repositoryClass: ItemDataRepository::class)]
 #[ORM\Table(name: 'item_data')]

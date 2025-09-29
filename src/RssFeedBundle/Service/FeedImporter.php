@@ -10,8 +10,8 @@ use FeedIo\FeedIo;
 use FeedIo\Reader\ReadErrorException;
 use TatevikGr\RssBundle\RssFeedBundle\Entity\FeedItem;
 use TatevikGr\RssBundle\RssFeedBundle\Entity\ItemData;
-use Tatevikgr\RssBundle\RssFeedBundle\Repository\FeedItemRepository;
-use Tatevikgr\RssBundle\RssFeedBundle\Repository\FeedRepository;
+use TatevikGr\RssBundle\RssFeedBundle\Repository\FeedItemRepository;
+use TatevikGr\RssBundle\RssFeedBundle\Repository\FeedRepository;
 
 class FeedImporter
 {
