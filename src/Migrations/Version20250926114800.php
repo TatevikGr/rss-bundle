@@ -9,6 +9,8 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20250926114800 extends AbstractMigration
 {
+    private const DEFAULT_PREFIX = 'phplist_';
+
     public function getDescription(): string
     {
         return 'Create feed, item, and item_data tables if they do not exist (keeping phpList rssfeed plugin schema).';
@@ -16,9 +18,13 @@ final class Version20250926114800 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
+        $feedTable = $this->prefixedTableName('feed');
+        $itemTable = $this->prefixedTableName('item');
+        $itemDataTable = $this->prefixedTableName('item_data');
+
         // feed table
-        if (!$schema->hasTable('feed')) {
-            $feed = $schema->createTable('feed');
+        if (!$schema->hasTable($feedTable)) {
+            $feed = $schema->createTable($feedTable);
             $feed->addColumn('id', 'integer', ['autoincrement' => true]);
             $feed->addColumn('url', 'text', ['notnull' => true]);
             $feed->addColumn('etag', 'string', ['length' => 100, 'notnull' => true, 'default' => '']);
@@ -27,8 +33,8 @@ final class Version20250926114800 extends AbstractMigration
         }
 
         // item table
-        if (!$schema->hasTable('item')) {
-            $item = $schema->createTable('item');
+        if (!$schema->hasTable($itemTable)) {
+            $item = $schema->createTable($itemTable);
             $item->addColumn('id', 'integer', ['autoincrement' => true]);
             $item->addColumn('uid', 'string', ['length' => 100, 'notnull' => true]);
             $item->addColumn('feedid', 'integer', ['notnull' => true]);
@@ -40,18 +46,18 @@ final class Version20250926114800 extends AbstractMigration
         }
 
         // Ensure FK from item.feedid -> feed.id if both exist and FK not present
-        if ($schema->hasTable('item') && $schema->hasTable('feed')) {
-            $item = $schema->getTable('item');
+        if ($schema->hasTable($itemTable) && $schema->hasTable($feedTable)) {
+            $item = $schema->getTable($itemTable);
             $hasFk = false;
             foreach ($item->getForeignKeys() as $fk) {
-                if ($fk->getLocalColumns() === ['feedid'] && $fk->getForeignTableName() === 'feed') {
+                if ($fk->getLocalColumns() === ['feedid'] && $fk->getForeignTableName() === $feedTable) {
                     $hasFk = true;
                     break;
                 }
             }
             if (!$hasFk) {
                 $item->addForeignKeyConstraint(
-                    'feed',
+                    $feedTable,
                     ['feedid'],
                     ['id'],
                     ['onDelete' => 'RESTRICT', 'onUpdate' => 'NO ACTION'],
@@ -61,8 +67,8 @@ final class Version20250926114800 extends AbstractMigration
         }
 
         // item_data table
-        if (!$schema->hasTable('item_data')) {
-            $itemData = $schema->createTable('item_data');
+        if (!$schema->hasTable($itemDataTable)) {
+            $itemData = $schema->createTable($itemDataTable);
             $itemData->addColumn('itemid', 'integer', ['notnull' => true]);
             $itemData->addColumn('property', 'string', ['length' => 100, 'notnull' => true]);
             $itemData->addColumn('value', 'text', ['notnull' => false]);
@@ -70,18 +76,18 @@ final class Version20250926114800 extends AbstractMigration
         }
 
         // Ensure FK from item_data.itemid -> item.id if both exist and FK not present
-        if ($schema->hasTable('item_data') && $schema->hasTable('item')) {
-            $itemData = $schema->getTable('item_data');
+        if ($schema->hasTable($itemDataTable) && $schema->hasTable($itemTable)) {
+            $itemData = $schema->getTable($itemDataTable);
             $hasFk = false;
             foreach ($itemData->getForeignKeys() as $fk) {
-                if ($fk->getLocalColumns() === ['itemid'] && $fk->getForeignTableName() === 'item') {
+                if ($fk->getLocalColumns() === ['itemid'] && $fk->getForeignTableName() === $itemTable) {
                     $hasFk = true;
                     break;
                 }
             }
             if (!$hasFk) {
                 $itemData->addForeignKeyConstraint(
-                    'item',
+                    $itemTable,
                     ['itemid'],
                     ['id'],
                     ['onDelete' => 'CASCADE', 'onUpdate' => 'NO ACTION'],
@@ -93,15 +99,32 @@ final class Version20250926114800 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        $itemDataTable = $this->prefixedTableName('item_data');
+        $itemTable = $this->prefixedTableName('item');
+        $feedTable = $this->prefixedTableName('feed');
+
         // Drop in reverse order to satisfy FKs
-        if ($schema->hasTable('item_data')) {
-            $schema->dropTable('item_data');
+        if ($schema->hasTable($itemDataTable)) {
+            $schema->dropTable($itemDataTable);
         }
-        if ($schema->hasTable('item')) {
-            $schema->dropTable('item');
+        if ($schema->hasTable($itemTable)) {
+            $schema->dropTable($itemTable);
         }
-        if ($schema->hasTable('feed')) {
-            $schema->dropTable('feed');
+        if ($schema->hasTable($feedTable)) {
+            $schema->dropTable($feedTable);
         }
+    }
+
+    /**
+     * The host application (phpList Core) prefixes all of its tables via DATABASE_PREFIX, defaulting to
+     * "phplist_". Migrations run outside the DI container, so that convention is read from the environment
+     * directly rather than injected, matching PhpList\Core\Migrations\AbstractPrefixedMigration.
+     */
+    private function prefixedTableName(string $tableName): string
+    {
+        $prefix = $_ENV['DATABASE_PREFIX'] ?? getenv('DATABASE_PREFIX');
+        $prefix = is_string($prefix) && $prefix !== '' ? $prefix : self::DEFAULT_PREFIX;
+
+        return $prefix . $tableName;
     }
 }
